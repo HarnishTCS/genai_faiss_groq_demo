@@ -1,0 +1,9 @@
+
+fastapi
+uvicorn
+sentence-transformers
+pymongo
+faiss-cpu
+requests
+transformers
+einops
