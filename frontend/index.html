@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Assistant</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 40px auto; }
+        textarea, button { width: 100%; padding: 10px; margin-top: 10px; font-size: 16px; }
+        #response { margin-top: 20px; background: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-line; }
+    </style>
+</head>
+<body>
+    <h2>Ask a Question</h2>
+    <textarea id="query" rows="4" placeholder="Enter your question..."></textarea>
+    <button onclick="ask()">Submit</button>
+    <div id="response"></div>
+    <script>
+        async function ask() {
+            const q = document.getElementById("query").value;
+            const r = document.getElementById("response");
+            r.innerText = "Loading...";
+            try {
+                const res = await fetch("http://127.0.0.1:8000/query?text=" + encodeURIComponent(q));
+                const data = await res.json();
+                r.innerText = data.response;
+            } catch (err) {
+                r.innerText = "Error: " + err;
+            }
+        }
+    </script>
+</body>
+</html>
